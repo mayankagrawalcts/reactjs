@@ -5,6 +5,7 @@ class FirstComponent extends Component {
     constructor(props) {
         super(props);
         this.clickedHandler = this.clickedHandler.bind(this);
+        console.log("this.props.children: ",this.props.children);
     }
 
     clickedHandler(event) {

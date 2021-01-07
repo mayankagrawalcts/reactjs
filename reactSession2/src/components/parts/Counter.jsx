@@ -12,13 +12,13 @@ class Counter extends Component {
         /*this.setState(prevState => {
             return {...prevState, counter: prevState.counter + 1}
         });*/
-        this.setState({counter: this.state.counter + 1})
+        this.setState({counter: this.state.counter + (this.props.by || 1)})
     }
 
     render() {
         return (
             <div>
-                <Button color="primary" variant="contained" onClick={this.handleChange}> Counter+1</Button> <TextField
+                <Button color="primary" variant="contained" onClick={this.handleChange}> {this.props.name}</Button> <TextField
                 id="counterTextField" aria-readonly value={this.state.counter}></TextField>
             </div>
         );

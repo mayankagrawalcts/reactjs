@@ -11,7 +11,8 @@ export default function Main() {
     }
     return (<>
             <TextField id="filled-basic" onChange={handleText} label="Filled" variant="filled"/>
-            <App state={state}/></>
+            <App state={state}/>
+            </>
 
     );
 };

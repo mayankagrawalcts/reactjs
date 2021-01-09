@@ -13,30 +13,27 @@ export default class PersonList extends React.Component {
             persons: [],
             person: undefined,
             id: 0,
-            show:true
+            show: true
         }
 
     }
 
-    handleClick(){
+    handleClick() {
         console.log("in handleClick");
         this.setState(prevState => {
             return {...prevState, show: false}
         });
     }
-    componentWillUnmount(){
-        console.log('This will unmount');
 
-    }
-/*
+    /*
 
-    shouldComponentUpdate(prevProps, prevState){
-        this.state.id==0 && this.setState(prevState => {
-            return {...prevState, id: 1}
-        });
-        return this.state.id==0?true: prevState.id != this.state.id;
-    }
-*/
+        shouldComponentUpdate(prevProps, prevState){
+            this.state.id==0 && this.setState(prevState => {
+                return {...prevState, id: 1}
+            });
+            return this.state.id==0?true: prevState.id != this.state.id;
+        }
+    */
 
     componentDidUpdate(prevProps, prevState) {
         console.log("in componentDidUpdate");
@@ -51,12 +48,12 @@ export default class PersonList extends React.Component {
                 })
         }
     }
-    handleText(event) {
 
+    handleText(event) {
         this.setState(prevState => {
             return {...prevState, id: event.target.value || 1}
         });
-        console.log("in handleText: ",this.state);
+        console.log("in handleText: ", this.state);
     }
 
     componentDidMount() {
@@ -66,40 +63,41 @@ export default class PersonList extends React.Component {
                 this.setState(prevState => {
                     return {...prevState, persons: persons, person: persons[0]}
                 });
+                console.log("componentDidMount: " + JSON.stringify(this.state));
             })
-        console.log("componentDidMount: " + JSON.stringify(this.state));
+
     }
 
     render() {
-        return this.state.show?
-         (<>
-                <TextField id="filled-basic" onChange={this.handleText} label="Filled" variant="filled"/>
-                <Button
-                    onClick={this.handleClick}
-                    variant="contained"
-                >
-                    button
-                </Button>
-                {
-                    (<table>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <ul>
-                                    {this.state.persons.map(person => <li key={person.id}>{person.name}</li>)}
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    {<li
-                                        key={this.state.person && this.state.person.name}>{this.state.person && this.state.person.name}</li>}
-                                </ul>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>)
-                }
-            </>
-        ): null
+        return this.state.show ?
+            (<>
+                    <TextField id="filled-basic" onChange={this.handleText} label="Filled" variant="filled"/>
+                    <Button
+                        onClick={this.handleClick}
+                        variant="contained"
+                    >
+                        button
+                    </Button>
+                    {
+                        (<table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        {this.state.persons.map(person => <li key={person.id}>{person.name}</li>)}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        {this.state.person && (<li
+                                            key={this.state.person.name}>{this.state.person.name}</li>)}
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>)
+                    }
+                </>
+            ) : null
     }
 }

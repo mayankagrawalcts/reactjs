@@ -8,6 +8,12 @@ import ErrorHandler, {ErrorBoundary} from "./components/ui/ErrorHandler";
 import Login from "./components/ui/Login";
 import HooksExample from "./components/HooksExample";
 import UseReducerHook from "./components/UseReducerHook";
+import {RefHook, UseRefHook} from "./components/parts/UseRefHook";
+import ForwardRefP from "./components/parts/ForwardRefP";
+import UseMemoH from "./components/parts/UseMemoH";
+import CustomHooks from "./components/parts/CustomHooks";
+import CustomHookupdated from "./components/parts/CustomHookUpdated";
+import SignUpForm from "./components/ui/SignUpForm";
 
 //import axios from "./components/utils/axios1";
 
@@ -46,6 +52,24 @@ function App(props: any) {
                 }
                 {
                     props.state == 8 && (<ErrorBoundary><UseReducerHook></UseReducerHook></ErrorBoundary>)
+                }
+                {
+                    props.state == 9 && (<ErrorBoundary><UseRefHook></UseRefHook><RefHook></RefHook></ErrorBoundary>)
+                }
+                {
+                    props.state == 10 && (<ErrorBoundary><ForwardRefP></ForwardRefP></ErrorBoundary>)
+                }
+                {
+                    props.state == 11 && (<ErrorBoundary><UseMemoH></UseMemoH></ErrorBoundary>)
+                }
+                {
+                    props.state == 12 && (<ErrorBoundary><CustomHooks></CustomHooks></ErrorBoundary>)
+                }
+                {
+                    props.state == 13 && (<ErrorBoundary><CustomHookupdated></CustomHookupdated></ErrorBoundary>)
+                }
+                {
+                    props.state == 14 && (<ErrorBoundary><SignUpForm></SignUpForm></ErrorBoundary>)
                 }
             </>
 

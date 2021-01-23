@@ -2,7 +2,7 @@ import {
     Avatar,
     Button,
     Container,
-    CssBaseline,
+    CssBaseline, Grid,
     Link,
     makeStyles,
     Paper,
@@ -11,36 +11,9 @@ import {
 } from "@material-ui/core";
 import {useForm} from "../hooks/useForm";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import React from "react";
 
-const Login = (props) => {
-
-    const useStyles = makeStyles((theme) => ({
-        paper: {
-            marginTop: theme.spacing(6),
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent:"center"
-          },
-        avatar: {
-            margin: theme.spacing(1),
-            backgroundColor: theme.palette.secondary.main,
-        },
-        form: {
-            width: '100%', // Fix IE 11 issue.
-            marginTop: theme.spacing(1),
-            marginBottom: theme.spacing(1),
-            // justifyItems: "center",
-            // display: "grid"
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent:"center"
-        },
-        // submit: {
-        //     margin: theme.spacing(0, 0, 2, 2),
-        // },
-    }));
+const LoginGrid = (props) => {
     const initialFValues = {username: "", password: "", authflag: 1};
     const validate = (fieldValues) => {
         let temp = {...errors}
@@ -74,19 +47,16 @@ const Login = (props) => {
             }
         }
     }
-    const classes = useStyles();
     return (
-        <>
-            <Container>
-                <CssBaseline/>
-                <div className={classes.paper}>
-                    {/*<Avatar className={classes.avatar}>*/}
-                    {/*    <LockOutlinedIcon/>*/}
-                    {/*</Avatar>*/}
+        <><CssBaseline>
+            <Grid container justify={"center"}>
+                <Grid container justify={"center"} alignItems={"center"} direction={"column"}>
+                    <Grid item>
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    </Grid>
+                    <Grid item>
                         <TextField type="username" placeholder="Username" name="username"
                                    variant="outlined" label={"Username"}
                                    value={values.username}
@@ -95,6 +65,8 @@ const Login = (props) => {
                                    error={errors.username ? true : false}
                                    helperText={errors.username || null}
                                    required autoFocus/>
+                    </Grid>
+                    <Grid item>
                         <TextField type="password"
                                    placeholder="Password" name="password"
                                    margin={"normal"}
@@ -105,17 +77,20 @@ const Login = (props) => {
                                    error={errors.password ? true : false}
                                    helperText={errors.password || null}
                                    required/><br/>
+                    </Grid>
+                    <Grid item>
                         <Button variant="contained" color="primary"
                                 onClick={handleSubmit}
-                                className={classes.submit}>Submit</Button>
-                        <br/>
+                                >Submit</Button><Button variant="contained" color="primary"
+                                                        onClick={resetForm}
+                    >Reset</Button>
+                    </Grid>
+                    <Grid item><br/>
                         <Link href="#" variant="body2">
                             {"Don't have an account? Sign Up"}
                         </Link>
-                    </form>
-                </div>
-            </Container></>
+                    </Grid></Grid></Grid></CssBaseline></>
     )
 };
 
-export default Login;
+export default LoginGrid;

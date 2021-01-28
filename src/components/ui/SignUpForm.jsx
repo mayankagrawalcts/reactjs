@@ -59,14 +59,14 @@ export default function SignUpForm(props) {
                         value={values.name}
                         onChange={handleInputChange}
                         style={{marginBottom: "10px"}}
-                        error={errors.name}
+                        helperText={errors.name}
                     />
                 </Grid>
                 <Grid item>
                     <Input
                         name="email"
                         onChange={handleInputChange}
-                        error={errors.email}
+                        helperText={errors.email}
                         style={{marginBottom: "10px"}}
                     /></Grid>
                 <Grid item>
@@ -75,7 +75,7 @@ export default function SignUpForm(props) {
                         name="job"
                         value={values.job}
                         onChange={handleInputChange}
-                        error={errors.job}
+                        helperText={errors.job}
                         style={{marginBottom: "10px"}}
                     /></Grid>
                 <Grid item>

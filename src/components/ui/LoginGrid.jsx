@@ -1,20 +1,18 @@
-import {
-    Avatar,
-    Button,
-    Container,
-    CssBaseline, Grid,
-    Link,
-    makeStyles,
-    Paper,
-    TextField,
-    Typography
-} from "@material-ui/core";
+import {Button, CssBaseline, Grid, Link, TextField, Typography} from "@material-ui/core";
 import {useForm} from "../hooks/useForm";
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import React from "react";
+import React, {useState} from "react";
+import {AuthService} from "../../services/AuthService";
+import {withSnackbar} from "../controls/WithSnackbar";
+import {CustomSnakbar} from "../controls/CustomSnakbar";
 
 const LoginGrid = (props) => {
     const initialFValues = {username: "", password: "", authflag: 1};
+    const initsnakbar = {open: false, message: null, duration: 200000, severity: "success"}
+    const [snakbar, setSnakbar] = useState(initsnakbar);
+    const handleClose = () => {
+        setSnakbar(initsnakbar);
+    }
+    const {login} = AuthService();
     const validate = (fieldValues) => {
         let temp = {...errors}
         if ('username' in fieldValues)
@@ -37,14 +35,21 @@ const LoginGrid = (props) => {
         handleInputChange,
         resetForm
     } = useForm(initialFValues, true, validate);
-
     const handleSubmit = e => {
         if (validate(values)) {
-            if (values.username == 'admin@littech.in' && values.password == 'secret') {
-                props.history.push("/home");
-            } else {
-                alert('Incorrect Credntials!');
-            }
+            console.log("in login: " + login(values.username, values.password));
+            login(values.username, values.password).then(res => {
+                if (res)
+                    props.history.push(`/welcome`);
+                else {
+                    props.snackbarShowMessage("failed due to incorrect username/password","error");
+                    setSnakbar({
+                        open: true, message: "open by custom message", duration: 200000, severity: "error"
+                    })
+                }
+            });
+
+
         }
     }
     return (
@@ -52,9 +57,9 @@ const LoginGrid = (props) => {
             <Grid container justify={"center"}>
                 <Grid container justify={"center"} alignItems={"center"} direction={"column"}>
                     <Grid item>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
+                        <Typography component="h1" variant="h5">
+                            Sign in
+                        </Typography>
                     </Grid>
                     <Grid item>
                         <TextField type="username" placeholder="Username" name="username"
@@ -81,16 +86,18 @@ const LoginGrid = (props) => {
                     <Grid item>
                         <Button variant="contained" color="primary"
                                 onClick={handleSubmit}
-                                >Submit</Button><Button variant="contained" color="primary"
-                                                        onClick={resetForm}
+                        >Submit</Button><Button variant="contained" color="primary"
+                                                onClick={resetForm}
                     >Reset</Button>
                     </Grid>
                     <Grid item><br/>
                         <Link href="#" variant="body2">
                             {"Don't have an account? Sign Up"}
                         </Link>
-                    </Grid></Grid></Grid></CssBaseline></>
+                    </Grid></Grid></Grid><CustomSnakbar snakbarProps={snakbar}
+                                                        handleClose={handleClose}></CustomSnakbar>
+        </CssBaseline></>
     )
 };
 
-export default LoginGrid;
+export default withSnackbar(LoginGrid);

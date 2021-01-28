@@ -68,7 +68,8 @@ const Login = (props) => {
     const handleSubmit = e => {
         if (validate(values)) {
             if (values.username == 'admin@littech.in' && values.password == 'secret') {
-                props.history.push("/home");
+                console.log("login success");
+                props.history.push("/welcome");
             } else {
                 alert('Incorrect Credntials!');
             }

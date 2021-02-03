@@ -14,6 +14,7 @@ import UseMemoH from "./components/parts/UseMemoH";
 import CustomHooks from "./components/parts/CustomHooks";
 import CustomHookupdated from "./components/parts/CustomHookUpdated";
 import SignUpForm from "./components/ui/SignUpForm";
+import SignUpWithoutHook from "./components/ui/SignUpWithoutHook";
 
 //import axios from "./components/utils/axios1";
 
@@ -70,6 +71,9 @@ function App(props: any) {
                 }
                 {
                     props.state == 14 && (<ErrorBoundary><SignUpForm></SignUpForm></ErrorBoundary>)
+                }
+                {
+                    props.state == 15 && (<ErrorBoundary><SignUpWithoutHook></SignUpWithoutHook></ErrorBoundary>)
                 }
             </>
 

@@ -1,10 +1,6 @@
 import React, {useState} from "react";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from '@material-ui/lab/Alert';
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="" {...props} />;
-}
+import Alert from '@material-ui/lab/Alert';
 
 export const withSnackbar = WrappedComponent => {
     const initState = {
@@ -28,9 +24,7 @@ export const withSnackbar = WrappedComponent => {
             if (reason === "clickaway") {
                 return;
             }
-            setState(prevState => {
-                return {...prevState, open: false}
-            });
+            setState(initState);
         };
 
         return (
@@ -48,7 +42,7 @@ export const withSnackbar = WrappedComponent => {
                     onClick={handleClose}
                     severity={state.severity}
                 >
-                    <Alert severity={state.severity}>{state.message}</Alert>
+                    <Alert variant="filled" severity={state.severity}>{state.message}</Alert>
                 </Snackbar>
             </>
         );

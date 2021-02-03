@@ -42,7 +42,7 @@ const LoginGrid = (props) => {
                 if (res)
                     props.history.push(`/welcome`);
                 else {
-                    props.snackbarShowMessage("failed due to incorrect username/password","error");
+                    props.snackbarShowMessage("failed due to incorrect username/password", "error");
                     setSnakbar({
                         open: true, message: "open by custom message", duration: 200000, severity: "error"
                     })

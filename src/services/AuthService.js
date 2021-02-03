@@ -9,7 +9,7 @@ export function AuthService() {
     async function login(email, password) {
         let res = await axios.post("https://reqres.in/api/login", {"email": email, "password": password})
             .catch(err => {
-                console.log("in error", err);
+                console.log("in error:", err.message);
                 return false;
             })
         if (res.status == 200) {

@@ -1,7 +1,6 @@
 import {useScrollTrigger, Zoom} from "@material-ui/core";
 import React from "react";
 import {makeStyles} from '@material-ui/core/styles';
-import NightsStayIcon from "@material-ui/icons/NightsStay";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,7 +26,6 @@ export default function ScrollTop(props) {
         }
     };
     return (
-
         <Zoom in={trigger}>
             <div onClick={handleClick} role="presentation" className={classes.root}>
                 {children}

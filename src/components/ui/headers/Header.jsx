@@ -93,7 +93,7 @@ const Header = (props) => {
                     className={clsx(classes.appBar, {
                         [classes.appBarShift]: openSidebar,
                     })}>
-                <Toolbar id="back-to-top-anchor">
+                <Toolbar id="back-to-top-anchor" component={"div"} variant={"dense"}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -105,22 +105,7 @@ const Header = (props) => {
                     </IconButton>
                     <Typography variant={"h4"} color={"textSecondary"}>
                         Arc Development</Typography>
-                    <Drawer
-                        className={classes.drawer}
-                        variant="persistent"
-                        anchor="left"
-                        open={openSidebar}
-                        classes={{
-                            paper: classes.drawerPaper,
-                        }}
-                    >
-                        <div className={classes.drawerHeader}>
-                            <IconButton onClick={handleDrawerClose}>
-                                {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
-                            </IconButton>
-                        </div>
-                        <Divider/>
-                        <Sidebar></Sidebar></Drawer>
+
                     <Tabs value={value} onChange={handleTabChange} className={classes.tabContainer}>
                         <Tab className={classes.tab} component={Link} to={"/home"} label={"Home"}/>
                         <Tab className={classes.tab} aria-owns={anchorEl ? "service-menu" : undefined}
@@ -146,6 +131,22 @@ const Header = (props) => {
                     <KeyboardArrowUpIcon/>
                 </Fab>
             </ScrollTop>
+            <Drawer
+                className={classes.drawer}
+                variant="persistent"
+                anchor="left"
+                open={openSidebar}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
+                    </IconButton>
+                </div>
+                <Divider/>
+                <Sidebar></Sidebar></Drawer>
         </>
     )
 }

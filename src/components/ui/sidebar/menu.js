@@ -6,6 +6,7 @@ export const menu = [
         icon: "home",
         title: "Home",
         to: "/services",
+		"id": "dashboard",
         items: []
     },
     {
@@ -29,10 +30,6 @@ export const menu = [
                     {
                         title: "Trend & Trend Lines",
                         to: "/aboutus"
-                    },
-                    {
-                        title: "Support & Resistance",
-                        to: "/sandr"
                     }
                 ]
             },
@@ -46,40 +43,9 @@ export const menu = [
                     {
                         title: "Charts & Chart Patterns",
                         to: "/chart"
-                    },
-                    {
-                        title: "Trend & Trend Lines",
-                        to: "/trendlines"
-                    },
-                    {
-                        title: "Support & Resistance",
-                        to: "/sandr"
                     }
                 ]
             },
-            {
-                title: "Elliot Wave Analysis",
-                items: [
-                    {
-                        title: "The Dow Theory",
-                        to: "/thedowtheory"
-                    },
-                    {
-                        title: "Charts & Chart Patterns",
-                        to: "/chart"
-                    },
-                    {
-                        title: "Trend & Trend Lines",
-                        to: "/trendlines"
-                    },
-                    {
-                        title: "Support & Resistance",
-                        to: "/sandr"
-                    }
-                ]
-            }
-        ]
-    },
     {
         icon: <TrendingUpOutlinedIcon/>,
         title: "Options",

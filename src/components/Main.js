@@ -4,7 +4,11 @@ import {createMuiTheme, ThemeProvider} from "@material-ui/core";
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 export const TemplateContext = React.createContext(null);
+export const sidebarContext = React.createContext(false);
+
 export default function Main() {
+    const [openSidebar, setOpenSidebar] = React.useState(false);
+
     const [lightState, setLightState] = useState(true);
     const paletteType = lightState ? "light" : "dark";
     // let [state, setState] = useState(1);
@@ -39,8 +43,7 @@ export default function Main() {
                     fontFamily: "Roboto-Black",
                     fontSize: "1rem",
                     textTransform: "none",
-                    fontWeight: 300,
-
+                    fontWeight: 900,
                 }
             }
         }), [lightState]);
@@ -49,13 +52,14 @@ export default function Main() {
             <App state={state}/>*/}
             {/*<Login></Login>*/}
             {/*<LoginGrid></LoginGrid>*/}
-            <TemplateContext.Provider value={{lightState, setLightState}}>
-                <ThemeProvider theme={theme}>
-                    <CssBaseline/>
-                    <RoutingApp/>
-                </ThemeProvider>
-            </TemplateContext.Provider>
+            <sidebarContext.Provider value={{openSidebar, setOpenSidebar}}>
+                <TemplateContext.Provider value={{lightState, setLightState}}>
+                    <ThemeProvider theme={theme}>
+                        <CssBaseline/>
+                        <RoutingApp/>
+                    </ThemeProvider>
+                </TemplateContext.Provider>
+            </sidebarContext.Provider>
         </>
-
     );
 };

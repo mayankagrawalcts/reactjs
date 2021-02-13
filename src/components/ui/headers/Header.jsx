@@ -1,22 +1,54 @@
 import React, {useContext, useEffect} from "react";
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, useLocation} from "react-router-dom";
 import NightsStayIcon from '@material-ui/icons/NightsStay';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
-import {AppBar, Button, Fab, Switch, Tab, Tabs, Toolbar, Typography} from "@material-ui/core";
-import {TemplateContext} from "../../Main";
+import useTheme from "@material-ui/core/styles/useTheme";
+import clsx from 'clsx';
+import {
+    AppBar,
+    Button,
+    Divider,
+    Drawer,
+    Fab,
+    IconButton,
+    Switch,
+    Tab,
+    Tabs,
+    Toolbar,
+    Typography
+} from "@material-ui/core";
+import {sidebarContext, TemplateContext} from "../../Main";
 import ScrollTop from "./ScrollTop";
 import {useStyles} from "./HeaderStyle";
 import {ServiceMenu} from "./ServiceMenu";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+
+
+import Sidebar from "../sidebar/Sidebar";
 
 const Header = (props) => {
     const history = useHistory();
+    const location = useLocation();
     const classes = useStyles();
     const {lightState, setLightState} = useContext(TemplateContext);
     const {value, setValue, anchorEl, setAnchorEl, open, setOpen, menuView} = ServiceMenu();
+    const {openSidebar, setOpenSidebar} = React.useContext(sidebarContext);
+
+    const theme = useTheme();
+    const handleDrawerOpen = () => {
+        setOpenSidebar(true);
+    };
+
+    const handleDrawerClose = () => {
+        setOpenSidebar(false);
+    };
+
     useEffect(() => {
-        console.log("window.location.pathname: ", window.location.pathname, "  value", value);
-        switch (window.location.pathname) {
+        console.log("history: ", history, "  useLocation:", location);
+        switch (location.pathname) {
             case "/":
             case "home":
                 value != 0 && setValue(0);
@@ -34,7 +66,7 @@ const Header = (props) => {
                 value != 0 && setValue(0);
                 break;
         }
-    }, [value])
+    }, [location.pathname]);
 
     function handleTabChange(event, newValue) {
         setValue(newValue);
@@ -57,10 +89,38 @@ const Header = (props) => {
 
     return (
         <>
-            <AppBar position={"static"}>
+            <AppBar position="static"
+                    className={clsx(classes.appBar, {
+                        [classes.appBarShift]: openSidebar,
+                    })}>
                 <Toolbar id="back-to-top-anchor">
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
+                        className={clsx(classes.menuButton, openSidebar && classes.hide)}
+                    >
+                        <MenuIcon/>
+                    </IconButton>
                     <Typography variant={"h4"} color={"textSecondary"}>
                         Arc Development</Typography>
+                    <Drawer
+                        className={classes.drawer}
+                        variant="persistent"
+                        anchor="left"
+                        open={openSidebar}
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                    >
+                        <div className={classes.drawerHeader}>
+                            <IconButton onClick={handleDrawerClose}>
+                                {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
+                            </IconButton>
+                        </div>
+                        <Divider/>
+                        <Sidebar></Sidebar></Drawer>
                     <Tabs value={value} onChange={handleTabChange} className={classes.tabContainer}>
                         <Tab className={classes.tab} component={Link} to={"/home"} label={"Home"}/>
                         <Tab className={classes.tab} aria-owns={anchorEl ? "service-menu" : undefined}

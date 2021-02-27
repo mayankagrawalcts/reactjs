@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import RoutingApp from "../routing/RoutingApp";
 import {createMuiTheme, ThemeProvider} from "@material-ui/core";
 import CssBaseline from '@material-ui/core/CssBaseline';
+import {api_url, app_id, env} from "../constants/appConstants";
 
 export const TemplateContext = React.createContext(null);
 export const sidebarContext = React.createContext(false);
@@ -11,6 +12,7 @@ export default function Main() {
 
     const [lightState, setLightState] = useState(true);
     const paletteType = lightState ? "light" : "dark";
+
     // let [state, setState] = useState(1);
     // const handleText = (event) => {
     //     if (event.target.value == '') setState(prevState => 1);
@@ -60,6 +62,11 @@ export default function Main() {
                     </ThemeProvider>
                 </TemplateContext.Provider>
             </sidebarContext.Provider>
+            <div className="App">
+                <p>env ID: {env}</p>
+                <p>API Key: {api_url}</p>
+                <p>app_id Key: {app_id}</p>
+            </div>
         </>
     );
 };

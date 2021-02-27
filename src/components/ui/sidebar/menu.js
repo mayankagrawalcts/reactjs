@@ -6,7 +6,7 @@ export const menu = [
         icon: "home",
         title: "Home",
         to: "/services",
-		"id": "dashboard",
+        "id": "dashboard",
         items: []
     },
     {
@@ -46,14 +46,15 @@ export const menu = [
                     }
                 ]
             },
-    {
-        icon: <TrendingUpOutlinedIcon/>,
-        title: "Options",
-        to: "/services",
-    },
-    {
-        icon: <DescriptionOutlinedIcon/>,
-        title: "Blog",
-        to: "/services",
-    }
-];
+            {
+                icon: <TrendingUpOutlinedIcon/>,
+                title: "Options",
+                to: "/services",
+            },
+            {
+                icon: <DescriptionOutlinedIcon/>,
+                title: "Blog",
+                to: "/services",
+            }
+        ]
+    }];

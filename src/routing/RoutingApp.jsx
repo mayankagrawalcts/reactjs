@@ -8,6 +8,7 @@ import {drawerWidth} from "../components/ui/headers/HeaderStyle";
 import clsx from 'clsx';
 import {sidebarContext} from "../components/Main";
 import {Container} from "@material-ui/core";
+import User from "../components/ui/User";
 
 const RoutingApp = (props) => {
     const {openSidebar, setOpenSidebar}=useContext(sidebarContext);
@@ -52,7 +53,7 @@ const RoutingApp = (props) => {
                 <AuthRoute exact path={"/aboutus"}
                            component={() => <div className={classes.basics}>aboutus</div>}/>
                 <AuthRoute exact path={"/home"}
-                           component={() => <div className={classes.basics}>home</div>}/>
+                           component={() => <div><User></User></div>}/>
                 <AuthRoute exact path={"/contactus"}
                            component={() => <div className={classes.basics}>contactus</div>}/>
                 <AuthRoute exact path={"/service1"}
